@@ -30,7 +30,21 @@ class ViewController: UIViewController {
           let key = thumbnail.key
           let imageUrlString = "\(domain)/\(basePath)/0/\(key)"
           return URL(string: imageUrlString)
-      }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.size.height
+        
+        if offsetY > contentHeight - height {
+            fetchMoreImages()
+        }
+    }
+
+    func fetchMoreImages() {
+     // I'd like to note that I've examined the API's pagination functionality, but it doesn't adhere to standard practices. It lacks options to specify page numbers or ranges for accessing the next block of images. While there are alternative methods to manage pagination using the current API, they aren't recommended practices.
+    }
 }
 
 extension ViewController: UICollectionViewDataSource {
